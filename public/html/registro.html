@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/styleGeral.css">
+    <title>Registro</title>
+</head>
+
+<body>
+    <div class="conteiner-login">
+        <h3>Faça seu login</h3>
+
+        <div class="conteiner-options">
+            <label>Usúario:</label>
+            <input type="text" id="usuario" placeholder="Usúario">
+
+            <label>Senha:</label>
+            <input type="password" id="senha" placeholder="Senha">
+
+            <label>Confrimar Senha:</label>
+            <input type="password" id="confirm_senha" placeholder="Confirme a senha">
+        </div>
+
+        <span id="msg_server"
+            style="display: block;margin: 10px; color: red;font-family: sans-serif;font-weight: bold;"></span>
+
+        <div class="botoes-options">
+            <a href="#" id="btn_registrar">Registrar</a>
+        </div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/scriptRegistre.js"></script>
+</body>
+
+</html>

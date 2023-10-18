@@ -1,0 +1,74 @@
+.conteiner-login {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.conteiner-login h3 {
+    font-family: sans-serif;
+    color: #333;
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.conteiner-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.conteiner-options label {
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.conteiner-options input {
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    outline: none;
+    font-family: sans-serif;
+}
+
+.conteiner-options input::placeholder {
+    color: #888;
+}
+
+.botoes-options {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    width: 100%;
+}
+
+.botoes-options span {
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#btn_entrar, #btn_registrar {
+    margin-left: auto;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4caf50;
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.35s;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#btn_entrar:hover, #btn_registrar:hover {
+    background-color: #45a049;
+}
