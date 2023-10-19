@@ -7,7 +7,7 @@ const app = express()
 
 const porta = process.env.PORTA
 const path = require("path")
-const { time_LoginBlock_verific } = require("./utils/functions")
+const { time_LoginBlock_verific, systemBlockLogin } = require("./utils/functions")
 
 // Date
 const time_Block_Login = new Date()
@@ -30,36 +30,34 @@ app.post("/login", async (req, res) => {
 
         const cliente = await db.findOne({ username });
         if (!cliente) {
-            res.status(400).json({ message: "Usúario ou senha incorretos", success: false });
+            res.status(400).json({ message: "Usuário não existe", success: false });
             return;
         }
 
         if (cliente.tentativas === 0) {
             if (!cliente.block_login) {
-                cliente.block_login = time_Block_Login.setSeconds(20)
-                await cliente.save();
+                systemBlockLogin(cliente, 20000)
+                return;
+            } else if (time_LoginBlock_verific(cliente.block_login, 20)) {
+                systemBlockLogin(cliente, 5000, 'unlock')
+                return;
             } else {
-                const timeBlockLogin = cliente.block_login
-                if (time_LoginBlock_verific(timeBlockLogin, 20)) {
-                    cliente.block_login = null
-                    cliente.tentativas = 5
-                    await cliente.save();
-                }
+                res.status(400).json({ message: "Conta bloqueada. Tente novamente mais tarde", success: false });
+                return;
             }
-            res.status(400).json({ message: "Conta bloqueada. Tente novamente mais tarde.", success: false });
-            return;
         }
 
-        if (cliente.password !== password && cliente.tentativas !== 0) {
-            cliente.tentativas--;
-            await cliente.save();
-            res.status(400).json({ message: "Usúario ou senha incorretos", success: false });
+        if (cliente.password !== password) {
+            systemBlockLogin(cliente, 5000, 'decrement-tries')
+            res.status(400).json({ message: "Usuário ou senha incorretos", success: false });
             return;
+        } else {
+            systemBlockLogin(cliente, 5000, 'reset-tries')
         }
 
         res.status(200).json({ message: "Login efetuado", success: true });
     } catch (err) {
-        res.status(500).json({ message: "Erro internal server." });
+        res.status(500).json({ message: "Erro interno do servidor." });
     }
 });
 
